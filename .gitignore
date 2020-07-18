@@ -1,2 +1,8 @@
 # CMake
 build/
+
+*.VC.db
+*.user
+x64/
+*.tga
+.vs/

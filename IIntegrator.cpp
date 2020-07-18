@@ -9,7 +9,7 @@
 
 #include <stdexcept>
 #include <cassert>
-
+#include <vector>
 
 //---------------------------------------------------------------------
 IIntegrator::IIntegrator(IModel *pModel, double h)
@@ -97,9 +97,9 @@ void IIntegrator::Evaluate(const double *initial,  // initial state vector
   assert(m_pModel);
 
   // estimate state at timestep i+h
-  double state[m_dim];
+  std::vector<double> state(m_dim);
   for (std::size_t i=0; i<m_pModel->GetDim(); ++i)
     state[i] = initial[i] + h*deriv_in[i];
 
-  m_pModel->Eval(state, time + h, deriv_out);
+  m_pModel->Eval(state.data(), time + h, deriv_out);
 }

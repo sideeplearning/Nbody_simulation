@@ -5,9 +5,9 @@
 #include <string>
 
 //--- SDL and OpenGL includes --------------------------------------------------
-#include <SDL/SDL.h>
-#include <SDL/SDL_gfxPrimitives.h>
-#include <SDL/SDL_opengl.h> // opengl support
+#include <SDL.h>
+#include <SDL_gfxPrimitives.h>
+#include <SDL_opengl.h> // opengl support
 #include <GL/gl.h>	// Header File For The OpenGL32 Library
 #include <GL/glu.h>	// Header File For The GLu32 Library
 

@@ -12,6 +12,7 @@
 #include <stdexcept>
 #include <sstream>
 #include <iostream>
+#include <vector>
 
 //------------------------------------------------------------------------------
 IntegratorADB2::IntegratorADB2(IModel *pModel, double h)
@@ -82,29 +83,29 @@ void IntegratorADB2::SetInitialState(double *state)
     m_state[i] = state[i];
 
   // RK4 for initialization
-  double k1[m_dim],
-         k2[m_dim],
-         k3[m_dim],
-         k4[m_dim],
-         tmp[m_dim];
+  std::vector<double> k1(m_dim),
+         k2(m_dim),
+         k3(m_dim),
+         k4(m_dim),
+         tmp(m_dim);
 
   // k1
-  m_pModel->Eval(m_state, m_time, k1);
+  m_pModel->Eval(m_state, m_time, k1.data());
   for (std::size_t i=0; i<m_dim; ++i)
     tmp[i] = m_state[i] + m_h*0.5 * k1[i];
 
   // k2
-  m_pModel->Eval(tmp, m_time + m_h*0.5, k2);
+  m_pModel->Eval(tmp.data(), m_time + m_h*0.5, k2.data());
   for (std::size_t i=0; i<m_dim; ++i)
     tmp[i] = m_state[i] + m_h*0.5 * k2[i];
 
   // k3
-  m_pModel->Eval(tmp, m_time + m_h*0.5, k3);
+  m_pModel->Eval(tmp.data(), m_time + m_h*0.5, k3.data());
   for (std::size_t i=0; i<m_dim; ++i)
     tmp[i] = m_state[i] + m_h * k3[i];
 
   // k4
-  m_pModel->Eval(tmp, m_time + m_h, k4);
+  m_pModel->Eval(tmp.data(), m_time + m_h, k4.data());
 
   for (std::size_t i=0; i<m_dim; ++i)
   {

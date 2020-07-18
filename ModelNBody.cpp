@@ -13,6 +13,7 @@
 #include <limits>
 #include <iostream>
 #include <omp.h>
+#include <algorithm>
 
 using namespace std;
 

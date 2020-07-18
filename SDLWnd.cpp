@@ -8,11 +8,21 @@
 #include <fstream>
 #include <ctime>
 #include <cmath>
+#include <vector>
 
 #include <GL/gl.h>	// Header File For The OpenGL32 Library
 #include <GL/glu.h>	// Header File For The GLu32 Library
-#include <GL/glx.h>     // Header file fot the glx libraries.
+//#include <GL/glx.h>     // Header file fot the glx libraries.
 
+#pragma comment(lib, "SDL.lib")
+#pragma comment(lib, "SDLmain.lib")
+#pragma comment(lib, "opengl32.lib")
+#pragma comment(lib, "glu32.lib")
+extern "C" { FILE __iob_func[3] = { *stdin,*stdout,*stderr }; }
+extern "C" int __CRTDECL __imp_fprintf(FILE* const _Stream, _In_z_ _Printf_format_string_ char const* const _Format, ...)
+{
+	return 0; 
+}
 
 // static functions / variables
 GLuint SDLWindow::s_fontBase = 0;
@@ -20,36 +30,36 @@ GLuint SDLWindow::s_fontBase = 0;
 //-----------------------------------------------------------------------
 void SDLWindow::InitFont()
 {
-  Display *dpy;          /* Our current X display */
-  XFontStruct *fontInfo; /* Our font info */
+  //Display *dpy;          /* Our current X display */
+  //XFontStruct *fontInfo; /* Our font info */
 
-  /* Sotrage for 96 characters */
-  s_fontBase = glGenLists(96);
+  ///* Sotrage for 96 characters */
+  //s_fontBase = glGenLists(96);
 
-  /* Get our current display long enough to get the fonts */
-  dpy = XOpenDisplay(NULL);
+  ///* Get our current display long enough to get the fonts */
+  //dpy = XOpenDisplay(NULL);
 
-  /* Get the font information */
-  fontInfo = XLoadQueryFont(dpy, "-adobe-helvetica-medium-r-normal--18-*-*-*-p-*-iso8859-1" );
+  ///* Get the font information */
+  //fontInfo = XLoadQueryFont(dpy, "-adobe-helvetica-medium-r-normal--18-*-*-*-p-*-iso8859-1" );
 
-  /* If the above font didn't exist try one that should */
-  if (fontInfo == NULL)
-  {
-    fontInfo = XLoadQueryFont(dpy, "fixed");
+  ///* If the above font didn't exist try one that should */
+  //if (fontInfo == NULL)
+  //{
+  //  fontInfo = XLoadQueryFont(dpy, "fixed");
 
-    /* If that font doesn't exist, something is wrong */
-    if (fontInfo == NULL)
-        throw std::runtime_error("no X font available?");
-  }
+  //  /* If that font doesn't exist, something is wrong */
+  //  if (fontInfo == NULL)
+  //      throw std::runtime_error("no X font available?");
+  //}
 
-  /* generate the list */
-  glXUseXFont( fontInfo->fid, 32, 96, s_fontBase);
+  ///* generate the list */
+  //glXUseXFont( fontInfo->fid, 32, 96, s_fontBase);
 
-  /* Recover some memory */
-  XFreeFont(dpy, fontInfo);
+  ///* Recover some memory */
+  //XFreeFont(dpy, fontInfo);
 
-  /* close the display now that we're done with it */
-  XCloseDisplay(dpy);
+  ///* close the display now that we're done with it */
+  //XCloseDisplay(dpy);
 }
 
 //-----------------------------------------------------------------------
@@ -204,8 +214,8 @@ void SDLWindow::SaveToTGA(const std::string &sName)
 
   int nSize = GetWidth() * GetHeight() * 3;
 
-  GLubyte pixels[nSize];
-  glReadPixels(0, 0, GetWidth(), GetHeight(), GL_RGB, GL_UNSIGNED_BYTE, pixels);
+  std::vector<GLubyte> pixels(nSize);
+  glReadPixels(0, 0, GetWidth(), GetHeight(), GL_RGB, GL_UNSIGNED_BYTE, pixels.data());
 
   std::string sFile;
   if (sName.length())
@@ -242,7 +252,7 @@ void SDLWindow::SaveToTGA(const std::string &sName)
   for (int i=0; i<nSize; i+=3)
     std::swap(pixels[i], pixels[i+2]);
 
-  file.write(reinterpret_cast<char*>(pixels), nSize);
+  file.write(reinterpret_cast<char*>(pixels.data()), nSize);
   file.close();
 }
 

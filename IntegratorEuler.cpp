@@ -4,7 +4,7 @@
 #include <cassert>
 #include <stdexcept>
 #include <sstream>
-
+#include <vector>
 
 //------------------------------------------------------------------------------
 IntegratorEuler::IntegratorEuler(IModel *pModel, double h)
@@ -29,8 +29,8 @@ IntegratorEuler::~IntegratorEuler()
 /** \brief Performs a single integration step. */
 void IntegratorEuler::SingleStep()
 {
-  double k1[m_dim];
-  m_pModel->Eval(m_state, m_time, k1);
+  std::vector<double> k1(m_dim);
+  m_pModel->Eval(m_state, m_time, k1.data());
 
   for (std::size_t i=0; i<m_dim; ++i)
     m_state[i] += m_h * k1[i];

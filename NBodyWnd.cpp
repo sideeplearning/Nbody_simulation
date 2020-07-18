@@ -12,6 +12,7 @@
 #include <cassert>
 #include <limits>
 #include <omp.h>
+#include <algorithm>
 
 //------------------------------------------------------------------------------
 #include "IntegratorRK4.h"
