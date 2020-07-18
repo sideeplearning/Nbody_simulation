@@ -1,0 +1,69 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="BHTree.cpp" />
+    <ClCompile Include="IIntegrator.cpp" />
+    <ClCompile Include="IModel.cpp" />
+    <ClCompile Include="IntegratorADB2.cpp" />
+    <ClCompile Include="IntegratorADB3.cpp" />
+    <ClCompile Include="IntegratorADB4.cpp" />
+    <ClCompile Include="IntegratorADB5.cpp" />
+    <ClCompile Include="IntegratorADB6.cpp" />
+    <ClCompile Include="IntegratorEuler.cpp" />
+    <ClCompile Include="IntegratorEulerImproved.cpp" />
+    <ClCompile Include="IntegratorHeun.cpp" />
+    <ClCompile Include="IntegratorRK3.cpp" />
+    <ClCompile Include="IntegratorRK4.cpp" />
+    <ClCompile Include="IntegratorRK5.cpp" />
+    <ClCompile Include="IntegratorRKF4.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="ModelNBody.cpp" />
+    <ClCompile Include="NBodyWnd.cpp" />
+    <ClCompile Include="SDLWnd.cpp" />
+    <ClCompile Include="Types.cpp" />
+    <ClCompile Include="Vector.cpp" />
+    <ClCompile Include="SDL_gfx\SDL_framerate.c" />
+    <ClCompile Include="SDL_gfx\SDL_gfxBlitFunc.c" />
+    <ClCompile Include="SDL_gfx\SDL_gfxPrimitives.c" />
+    <ClCompile Include="SDL_gfx\SDL_imageFilter.c" />
+    <ClCompile Include="SDL_gfx\SDL_rotozoom.c" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="BHTree.h" />
+    <ClInclude Include="IIntegrator.h" />
+    <ClInclude Include="IModel.h" />
+    <ClInclude Include="IntegratorADB2.h" />
+    <ClInclude Include="IntegratorADB3.h" />
+    <ClInclude Include="IntegratorADB4.h" />
+    <ClInclude Include="IntegratorADB5.h" />
+    <ClInclude Include="IntegratorADB6.h" />
+    <ClInclude Include="IntegratorEuler.h" />
+    <ClInclude Include="IntegratorEulerImproved.h" />
+    <ClInclude Include="IntegratorHeun.h" />
+    <ClInclude Include="IntegratorRK3.h" />
+    <ClInclude Include="IntegratorRK4.h" />
+    <ClInclude Include="IntegratorRK5.h" />
+    <ClInclude Include="IntegratorRKF4.h" />
+    <ClInclude Include="MagPendWnd.h" />
+    <ClInclude Include="ModelMagPend.h" />
+    <ClInclude Include="ModelNBody.h" />
+    <ClInclude Include="NBodyWnd.h" />
+    <ClInclude Include="SDLWnd.h" />
+    <ClInclude Include="Types.h" />
+    <ClInclude Include="Vector.h" />
+    <ClInclude Include="SDL_gfx\SDL_framerate.h" />
+    <ClInclude Include="SDL_gfx\SDL_gfxBlitFunc.h" />
+    <ClInclude Include="SDL_gfx\SDL_gfxPrimitives.h" />
+    <ClInclude Include="SDL_gfx\SDL_gfxPrimitives_font.h" />
+    <ClInclude Include="SDL_gfx\SDL_imageFilter.h" />
+    <ClInclude Include="SDL_gfx\SDL_rotozoom.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="INSTALL.md" />
+    <None Include="Makefile" />
+    <None Include="README.md" />
+  </ItemGroup>
+</Project>
