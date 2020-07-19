@@ -6,3 +6,4 @@ build/
 x64/
 *.tga
 .vs/
+output/

@@ -68,6 +68,8 @@ private:
     bool m_bDumpState;
     bool m_bDumpImage;
     std::ofstream m_outfile;
+
+	int m_frameID;
 };
 
 #endif	/* _NBODYWND_H */
