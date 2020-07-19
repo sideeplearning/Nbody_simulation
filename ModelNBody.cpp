@@ -38,6 +38,7 @@ ModelNBody::ModelNBody()
   ,time_1(sqrt( (pc_in_m*pc_in_m*pc_in_m)/(gamma_si*mass_sun) ) / (365.25*86400))
   ,m_num(0)
   ,m_bVerbose(false)
+  ,size_galaxy_main(10000)
 {
   BHTreeNode::s_gamma = gamma_1;
 
@@ -259,7 +260,8 @@ void ModelNBody::Init()
 void ModelNBody::InitCollision()
 {
   // Reset model size
-  ResetDim(5000, 100);
+  ResetDim(12000, 100);
+    
 
   // initialize particles
   ParticleData blackHole;
@@ -281,7 +283,7 @@ void ModelNBody::InitCollision()
       st.vx = st.vy = 0;
       st_aux.mass = 1000000; //431000;   // 4.31 Millionen Sonnenmassen
     }
-    else if (i<4000)
+    else if (i< size_galaxy_main)
     {
       const double rad = 10;
       double r = 0.1 + .8 * (rad * ((double)rand() / RAND_MAX));
@@ -289,10 +291,11 @@ void ModelNBody::InitCollision()
       st_aux.mass = 0.03 + 20 * ((double)rand() / RAND_MAX);
       st.x = r*sin(a);
       st.y = r*cos(a);
+	  std::cout << r << ',' <<a <<  "\n";
 
       GetOrbitalVelocity(blackHole, ParticleData(&st, &st_aux));
     }
-    else if (i==4000)
+    else if (i== size_galaxy_main)
     {
       blackHole2.m_pState = &st;
       blackHole2.m_pAuxState = &st_aux;

@@ -77,10 +77,14 @@ void NBodyWnd::Render()
   {
     m_pSolver->SingleStep();
     ++ct;
+
+	PODState *state = reinterpret_cast<PODState*>(m_pSolver->GetState());
+
     if (m_bDumpState && ct%1000000==0)
     {
       int num = m_pModel->GetDim()/4;
-      PODState *state = reinterpret_cast<PODState*>(m_pSolver->GetState());
+      
+
       m_outfile << m_pSolver->GetTime() << ", ";
       for (int i=0; i<num; ++i)
       {
@@ -95,6 +99,25 @@ void NBodyWnd::Render()
       SaveToTGA();
     }
 
+
+	if (m_frameID % 5 == 0)
+	{
+		std::ofstream output;
+		output.open("output/" + std::to_string(m_frameID) + ".txt");
+
+
+
+		for (int i = 0; i < m_pModel->GetN(); ++i)
+		{
+
+
+			output << state[i].x << "," << state[i].y << ",";
+			output << state[i].vx << "," << state[i].vy << "\n";
+		}
+
+
+		output.close();
+	}
     // the bottleneck is the output, reduce load a bit
 //    if (ct%10000!=0)
 //      return;
@@ -151,26 +174,20 @@ void NBodyWnd::DrawBodies()
   PODState *state = reinterpret_cast<PODState*>(m_pSolver->GetState());
 //  const PODAuxState *state_aux  = m_pModel->GetAuxState();
 
-  if (m_frameID % 5 == 0)
+  glColor3f(1, 1, 1);
+  glPointSize(2); //state_aux[i].mass/10);
+  glBegin(GL_POINTS);
+
+  for (int i = 0; i < m_pModel->GetN(); ++i)
   {
-	  std::ofstream output;
-	  output.open("output/" + std::to_string(m_frameID) + ".txt");
+	  glVertex3f(state[i].x, state[i].y, 0.0f);
 
-	  glColor3f(1, 1, 1);
-	  glPointSize(2); //state_aux[i].mass/10);
-	  glBegin(GL_POINTS);
 
-	  for (int i = 0; i < m_pModel->GetN(); ++i)
-	  {
-		  glVertex3f(state[i].x, state[i].y, 0.0f);
-
-		  output << state[i].x << "," << state[i].y << ",";
-		  output << state[i].vx << "," << state[i].vy << "\n";
-	  }
-
-	  glEnd();
-	  output.close();
   }
+
+  glEnd();
+
+  
 }
 
 //------------------------------------------------------------------------------

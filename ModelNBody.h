@@ -48,6 +48,8 @@ public:
     void SetROI(double roi);
     double GetROI() const;
 
+	
+
 private:
 
     void CalcBHArea(const ParticleData &p);
@@ -73,6 +75,9 @@ private:
     const double time_1;
     int m_num;
     bool m_bVerbose;
+	const int size_galaxy_main;
+
+	
 };
 
 #endif
