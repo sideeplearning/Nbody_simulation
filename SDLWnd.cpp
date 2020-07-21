@@ -212,8 +212,9 @@ void SDLWindow::SaveToTGA(int idx)
     m_idxSnapshot = idx;
 
   std::stringstream ss;
-  ss << "frame_" << std::setw(5) << std::setfill('0') << m_idxSnapshot << ".tga";
+  ss << "output_tga/" <<"frame_" << std::setw(5) << std::setfill('0') << m_idxSnapshot << ".tga";
   SaveToTGA(ss.str());
+
 }
 
 //-----------------------------------------------------------------------
@@ -396,7 +397,8 @@ void SDLWindow::MainLoop()
   double dt = 0;
   time_t t1(time(NULL)), t2;
 
-  while (m_bRunning)
+  //while (m_bRunning)
+  while (true)
   {
     Render();
     PollEvents();
