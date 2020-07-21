@@ -80,7 +80,7 @@ void NBodyWnd::Render()
 
 	PODState *state = reinterpret_cast<PODState*>(m_pSolver->GetState());
 
-    if (m_bDumpState && ct%1000000==0)
+    if (m_bDumpState && ct%5==0)
     {
       int num = m_pModel->GetDim()/4;
       
@@ -92,9 +92,11 @@ void NBodyWnd::Render()
                   << state[i].y << ", ";
       }
       m_outfile << std::endl;
+
+	  //SaveToTGA();
     }
 
-    if (m_bDumpImage && ct%2000==0)
+    if (m_bDumpImage && ct%5==0)
     {
       SaveToTGA();
     }
@@ -103,14 +105,10 @@ void NBodyWnd::Render()
 	if (m_frameID % 5 == 0)
 	{
 		std::ofstream output;
-		output.open("output/" + std::to_string(m_frameID) + ".txt");
-
-
+		output.open("output_txt/" + std::to_string(m_frameID) + ".txt");
 
 		for (int i = 0; i < m_pModel->GetN(); ++i)
 		{
-
-
 			output << state[i].x << "," << state[i].y << ",";
 			output << state[i].vx << "," << state[i].vy << "\n";
 		}
@@ -181,8 +179,6 @@ void NBodyWnd::DrawBodies()
   for (int i = 0; i < m_pModel->GetN(); ++i)
   {
 	  glVertex3f(state[i].x, state[i].y, 0.0f);
-
-
   }
 
   glEnd();

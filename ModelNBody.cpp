@@ -259,7 +259,7 @@ void ModelNBody::Init()
 //------------------------------------------------------------------------
 void ModelNBody::InitCollision()
 {
-  // Reset model size
+  // Reset model size and year per step
   ResetDim(12000, 100);
     
 
@@ -291,7 +291,7 @@ void ModelNBody::InitCollision()
       st_aux.mass = 0.03 + 20 * ((double)rand() / RAND_MAX);
       st.x = r*sin(a);
       st.y = r*cos(a);
-	  std::cout << r << ',' <<a <<  "\n";
+	  //std::cout << r << ',' <<a <<  "\n";
 
       GetOrbitalVelocity(blackHole, ParticleData(&st, &st_aux));
     }
